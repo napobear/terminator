@@ -1,0 +1,11 @@
+TOPNT	=	$02
+
+CLRMEM:	LDA	#$00		;Set up zero value
+	TAY			;Initialize index pointer
+CLRM1:	STA	(TOPNT),Y	;Clear memory location
+	INY			;Advance index pointer
+	DEX			;Decrement counter
+	BNE	CLRM1		;Not zero, continue checking
+	RTS			;Return
+	.END
+

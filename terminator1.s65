@@ -1,0 +1,34 @@
+;*******************
+
+	.ORG     $4000
+A1	= $3C
+A2	= $3E
+A4	= $42
+
+ALTMOVE	= $C311
+
+VTOC	= $5000
+END     = $5FFF
+
+;****************************
+;* SETUP. move data for VTOC
+;* and catalog to memory at
+;* $ 000 - $ 3FF (pseudo TRK 11
+;* # -1)
+;**************************
+SETUP:	LDA #<VTOC
+	STA A1
+	LDA #>VTOC
+	STA A1+1
+	LDA #<END
+	STA A2
+	LDA #>END
+	STA A2+1
+	LDA #$00
+	STA A4
+	LDA #$80
+	STA A4+1
+	SEC
+	JMP ALTMOVE
+	.END
+
